@@ -1,0 +1,222 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-4">
+  @switch (data.type) { @case (variableType.CONFRONTATION) {
+  <div class="space-y-4">
+    <input type="hidden" formControlName="id" />
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Preço</label>
+      <input
+        formControlName="price"
+        placeholder="0"
+        type="number"
+        step="0.01"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("price") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700"> De (km) </label>
+      <input
+        formControlName="areaMin"
+        placeholder="0"
+        type="number"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("areaMin") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700"> Até (km) </label>
+      <input
+        formControlName="areaMax"
+        placeholder="0"
+        type="number"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("areaMax") }}</small>
+    </div>
+    <div class="space-y-2">
+      <div class="flex items-center">
+        <label class="ml-2 text-sm text-gray-700 flex items-center gap-2">
+          <input
+            formControlName="urbanConfrontation"
+            type="checkbox"
+            class="w-5 h-5 border rounded-md focus:outline-none"
+          />
+          Confrontação Urbana
+        </label>
+      </div>
+      <div class="flex items-center">
+        <label class="ml-2 text-sm text-gray-700 flex items-center gap-2">
+          <input
+            formControlName="ruralConfrontation"
+            type="checkbox"
+            class="w-5 h-5 border rounded-md focus:outline-none"
+          />
+          Confrontação Rural</label
+        >
+      </div>
+    </div>
+  </div>
+  } @case (variableType.DISPLACEMENT) {
+  <div class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">
+        Distâcia mínima (km)
+      </label>
+      <input
+        formControlName="areaMin"
+        placeholder="0"
+        type="number"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("areaMin") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">
+        Distância Máxima (km)
+      </label>
+      <input
+        formControlName="areaMax"
+        placeholder="0"
+        type="number"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("areaMax") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">
+        Multiplicador
+      </label>
+      <input
+        formControlName="multiplier"
+        placeholder="0"
+        type="number"
+        step="0.1"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("multiplier") }}</small>
+    </div>
+  </div>
+  } @case (variableType.ACCOMODATION) {
+  <div class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Preço</label>
+      <input
+        formControlName="price"
+        placeholder="0"
+        type="number"
+        step="0.01"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("price") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">
+        Distância Mínima (km)
+      </label>
+      <input
+        formControlName="distanteMin"
+        placeholder="0"
+        type="number"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("distanteMin") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">
+        Distância Máxima (km)
+      </label>
+      <input
+        formControlName="distanteMax"
+        placeholder="0"
+        type="number"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("distanteMax") }}</small>
+    </div>
+  </div>
+  } @case (variableType.STARTING_POINT) {
+  <div class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Rua</label>
+      <input
+        formControlName="street"
+        placeholder="Rua"
+        type="text"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("street") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Número</label>
+      <input
+        formControlName="number"
+        placeholder="Número"
+        type="text"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("number") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Bairro</label>
+      <input
+        formControlName="neighborhood"
+        placeholder="Bairro"
+        type="text"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("neighborhood") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Cidade</label>
+      <input
+        formControlName="city"
+        placeholder="Cidade"
+        type="text"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("city") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Estado</label>
+      <input
+        formControlName="state"
+        placeholder="Estado"
+        type="text"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("state") }}</small>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">País</label>
+      <input
+        formControlName="country"
+        placeholder="País"
+        type="text"
+        class="w-full px-3 py-2 border rounded-md focus:outline-none"
+      />
+      <small class="text-red-500">{{ getFieldError("country") }}</small>
+    </div>
+  </div>
+  } }
+
+  <div class="mt-6 flex justify-end space-x-3">
+    <button
+      type="button"
+      (click)="onClose()"
+      class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#58A082] rounded-md border border-gray-300"
+    >
+      Cancelar
+    </button>
+    <button
+      type="submit"
+      [disabled]="!isFormValid()"
+      [ngClass]="{
+        'bg-[#58A082] hover:bg-[#4a8870] cursor-pointer ': isFormValid(),
+        'bg-gray-300 text-gray-500 cursor-not-allowed': !isFormValid()
+      }"
+      class="px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md text-white"
+    >
+      Salvar
+    </button>
+  </div>
+</form>

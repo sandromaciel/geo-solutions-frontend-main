@@ -1,0 +1,40 @@
+<div class="max-w-7xl mx-auto space-y-12 mt-4">
+  <div class="bg-white rounded-lg shadow-sm p-8 md:p-12">
+    <h1 class="text-3xl md:text-4xl font-semibold text-[#1E1E1E] mb-6">
+      Nossas Soluções
+    </h1>
+    <p class="text-lg text-gray-700 leading-relaxed max-w-3xl">
+      Oferecemos um conjunto completo de serviços em geotecnologia, combinando
+      expertise técnica com tecnologia de ponta para entregar resultados
+      excepcionais.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (service of services; track $index) {
+    <app-service-card
+      [icon]="service.icon"
+      [title]="service.title"
+      [description]="service.description"
+    ></app-service-card>
+
+    }
+  </div>
+
+  <div
+    class="bg-[#0A3C2F] text-white rounded-lg shadow-sm p-8 md:p-12 text-center mb-4"
+  >
+    <h2 class="text-2xl md:text-3xl font-semibold mb-4">
+      Precisa de uma solução personalizada?
+    </h2>
+    <p class="text-lg mb-8 opacity-90">
+      Nossa equipe está pronta para atender às suas necessidades específicas.
+    </p>
+    <button
+      class="px-6 py-3 bg-[#00B66C] rounded-lg hover:bg-white hover:text-[#0A3C2F] transition-colors duration-300"
+      (click)="openWhatsApp()"
+    >
+      Entre em contato
+    </button>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="relative">
+  <app-main-header></app-main-header>
+  <app-sidebar></app-sidebar>
+
+  <main
+    class="pt-16 transition-all duration-300 min-h-screen bg-gray-50"
+    [ngClass]="{
+      'lg:pl-80': layout.isSidebarOpen,
+      'lg:pl-28': !layout.isSidebarOpen
+    }"
+  >
+    <router-outlet></router-outlet>
+  </main>
+</div>

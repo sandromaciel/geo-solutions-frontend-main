@@ -1,0 +1,43 @@
+<aside
+  class="fixed top-0 left-0 h-full bg-gray-900 text-white shadow-lg transition-all duration-300 transform lg:transform-none"
+  [ngClass]="{
+    'w-72 translate-x-0': layout.isSidebarOpen,
+    'w-20 -translate-x-full lg:translate-x-0': !layout.isSidebarOpen
+  }"
+  style="z-index: 1000"
+>
+  <div class="sticky top-0 bg-black z-10">
+    <div class="h-16 px-4 flex items-center justify-between">
+      <div class="flex items-center">
+        <img src="assets/images/logo_img.png" class="w-[160px]" />
+      </div>
+      <button
+        (click)="layout.toggleSidebar()"
+        class="p-2 hover:bg-emerald-500/20 rounded-lg ml-auto"
+      >
+        <lucide-angular [img]="icons.menu" class="w-6 h-6 text-emerald-400" />
+      </button>
+    </div>
+  </div>
+
+  <nav class="mt-2 px-2 space-y-1">
+    @for (item of menuItems; track $index) {
+    <app-nav-item
+      class="hover:bg-emerald-500/10 rounded-md transition-colors duration-200"
+      [icon]="item.icon"
+      [routerLink]="item.path"
+      [label]="item.text"
+      [isActive]="isActive(item.path)"
+    />
+    }
+  </nav>
+
+  <div class="absolute bottom-4 w-full px-2">
+    <app-nav-item
+      class="hover:bg-red-500/10 rounded-md"
+      [icon]="icons.logout"
+      label="Sair"
+      (click)="logout()"
+    />
+  </div>
+</aside>

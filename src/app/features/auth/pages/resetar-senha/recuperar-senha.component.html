@@ -1,0 +1,69 @@
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f7f7f7;">
+        <div style="background-color: white; padding: 32px; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); width: 100%; max-width: 400px;">
+          <h2 style="text-align: center; margin-bottom: 16px; font-size: 26px;">
+            {{ segundaEtapa ? 'Redefinir Senha' : 'Recuperar Senha' }}
+          </h2>
+          <p style="text-align: center; font-size: 14px; color: #666; margin-bottom: 24px;">
+            {{ segundaEtapa
+              ? 'Digite o código enviado ao seu e-mail e defina sua nova senha.'
+              : 'Digite seu e-mail para receber instruções de recuperação.' }}
+          </p>
+      
+          <form [formGroup]="recuperarForm" (ngSubmit)="enviar()">
+      
+            <!-- Primeira etapa -->
+            <ng-container *ngIf="!segundaEtapa">
+              <label for="email" style="font-weight: 500; display: block; margin-bottom: 6px;">E-mail</label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                placeholder="exemplo@email.com"
+                style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 12px;"
+              />
+              <div *ngIf="recuperarForm.get('email')?.invalid && recuperarForm.get('email')?.touched"
+                style="color: red; font-size: 12px; margin-bottom: 12px;">
+                E-mail inválido
+              </div>
+            </ng-container>
+      
+            <!-- Segunda etapa -->
+            <ng-container *ngIf="segundaEtapa">
+              <label for="codigo" style="font-weight: 500; display: block; margin-bottom: 6px;">Código</label>
+              <input
+                type="text"
+                id="codigo"
+                formControlName="codigo"
+                placeholder="Código recebido"
+                style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 12px;"
+              />
+      
+              <label for="novaSenha" style="font-weight: 500; display: block; margin-bottom: 6px;">Nova Senha</label>
+              <input
+                type="password"
+                id="novaSenha"
+                formControlName="novaSenha"
+                placeholder="Nova senha"
+                style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 12px;"
+              />
+      
+              <label for="confirmarSenha" style="font-weight: 500; display: block; margin-bottom: 6px;">Confirmar Senha</label>
+              <input
+                type="password"
+                id="confirmarSenha"
+                formControlName="confirmarSenha"
+                placeholder="Confirmar senha"
+                style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 12px;"
+              />
+            </ng-container>
+      
+            <button
+              type="submit"
+              [disabled]="!recuperarForm.valid"
+              style="width: 100%; padding: 10px; background-color: #82C856; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;"
+            >
+              {{ segundaEtapa ? 'Redefinir Senha' : 'Enviar Instruções' }}
+            </button>
+          </form>
+        </div>
+      </div>

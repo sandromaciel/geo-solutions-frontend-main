@@ -1,0 +1,30 @@
+<div class="bg-white rounded-xl shadow-sm">
+  <div class="flex items-center justify-between p-6 border-b border-gray-100">
+    <h3 class="text-lg font-medium text-[#5B5B5B]">
+      {{ title() }}
+    </h3>
+    <button
+      class="w-8 h-8 rounded-lg bg-[#58A082] text-white flex items-center justify-center hover:bg-[#4a8870] transition-colors"
+      (click)="openAddConfigModal()"
+    >
+      <lucide-angular [img]="icons.plus" class="w-5 h-5" />
+    </button>
+  </div>
+  <div class="h-[300px] overflow-y-auto divide-y divide-gray-100">
+    @for (config of configs(); track $index) {
+    <app-variable-config-item
+      [type]="type()"
+      [config]="config"
+      [onDelete]="onDelete()"
+      [onEdit]="openEditConfigModal.bind(this, config)"
+    />
+
+    } @empty {
+    <div
+      class="p-6 text-center text-gray-500 h-100 flex items-center justify-center"
+    >
+      Nenhuma configuração cadastrada
+    </div>
+    }
+  </div>
+</div>

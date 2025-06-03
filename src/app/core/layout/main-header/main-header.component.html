@@ -1,0 +1,27 @@
+<header
+  class="fixed top-0 right-0 left-0 h-16 bg-white shadow-sm px-4"
+  style="z-index: 999"
+>
+  <div class="h-full flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <button
+        (click)="layout.toggleSidebar()"
+        class="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+      >
+        <lucide-angular [img]="icons.menu" class="w-6 h-6 text-[#4D9F87]" />
+      </button>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <div class="text-right hidden sm:block">
+        <div class="font-medium text-[#1E1E1E]">{{ userName }}</div>
+        <div class="text-sm text-[#6B7280]">{{ userRole }}</div>
+      </div>
+      <div
+        class="w-10 h-10 bg-[#4D9F87] rounded-full flex items-center justify-center flex-shrink-0"
+      >
+        <lucide-angular [img]="icons.user" class="w-6 h-6 text-white" />
+      </div>
+    </div>
+  </div>
+</header>

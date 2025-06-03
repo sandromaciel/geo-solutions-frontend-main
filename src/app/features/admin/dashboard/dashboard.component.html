@@ -1,0 +1,119 @@
+<div class="p-4 sm:p-4 lg:p-6 space-y-6">
+  <div class="mb-8">
+    <h1 class="text-2xl font-semibold text-[#1a1a1a]">Olá, {{ userName }}</h1>
+    <p class="text-[#707070]">Bem-vindo de volta</p>
+  </div>
+
+<app-dashboard-card title="Atividade Mensal" className="h-[400px]" *ngIf="isDataLoaded()">
+  <div class="h-[300px]">
+    <apx-chart
+      [series]="chartSeries"
+      [chart]="{ type: 'bar', height: 300 }"
+      [xaxis]="{ categories: chartData().categories }"
+      [colors]="['#4CAF50']"
+    >
+    </apx-chart>
+  </div>
+</app-dashboard-card>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4">
+   <app-dashboard-card title="Últimos Orçamentos">
+      <div class="flex items-center gap-2 mb-2 text-emerald-600">
+        <lucide-angular [img]="icons.fileText" [size]="20" />
+        <span class="font-medium">Histórico de Propostas</span>
+        <span class="ml-auto text-sm text-gray-500 hidden sm:inline"
+          >{{ budgets().length }} registros</span
+        >
+      </div>
+      <div class="space-y-2">
+        @for (item of budgets() | slice:0:3; track $index) {
+        <div
+          class="p-2 rounded-lg transition-colors hover:bg-emerald-500 hover:text-white cursor-pointer gap-4"
+        >
+          <p class="font-medium">{{ item.intentionService.name }}</p> 
+          <p class="text-xs group-hover:text-white hidden sm:block truncate">
+            {{ item.price | currency : "BRL" }}
+          </p>
+        </div>
+        } @empty {
+        <p class="text-gray-400 italic">Nenhum orçamento recente encontrado.</p>
+        }
+      </div>
+    </app-dashboard-card>
+
+    <app-dashboard-card title="Serviços">
+      <div class="flex items-center gap-2 mb-2 text-emerald-600">
+        <lucide-angular [img]="icons.settings" [size]="20" />
+        <span class="font-medium">Tipos oferecidos</span>
+        <span class="ml-auto text-sm text-gray-500 hidden sm:inline"
+          >{{ services().length }} tipos</span
+        >
+      </div>
+      <div class="space-y-2">
+        @for (service of services(); track $index) {
+        <div
+          class="flex justify-between items-center p-2 rounded-lg transition-colors hover:bg-emerald-500 hover:text-white cursor-pointer gap-4"
+          [title]="service.description"
+        >
+          <span class="font-medium">{{ service.name }}</span>
+          <span
+            class="text-xs group-hover:text-white hidden sm:block truncate"
+            >{{ service.description }}</span
+          >
+        </div>
+        } @empty {
+        <p class="text-gray-400 italic">Nenhum serviço disponível.</p>
+        }
+      </div>
+    </app-dashboard-card>
+
+    <app-dashboard-card title="Cidades e Regiões">
+      <div class="flex items-center gap-2 mb-2 text-emerald-600">
+        <lucide-angular [img]="icons.mapPin" [size]="20" />
+        <span class="font-medium">Abrangência</span>
+        <span class="ml-auto text-sm text-gray-500 hidden sm:inline"
+          >{{ cities().length }} cidades</span
+        >
+      </div>
+      <div class="space-y-2">
+        @for (city of cities(); track $index) {
+        <div
+          class="p-2 rounded-lg transition-colors hover:bg-emerald-500 hover:text-white cursor-pointer gap-4"
+        >
+          <p class="font-medium">{{ city.name }}</p>
+          <p class="text-xs group-hover:text-white hidden sm:block truncate">
+            {{ city.state }}
+          </p>
+        </div>
+        } @empty {
+        <p class="text-gray-400 italic">Nenhuma cidade cadastrada.</p>
+        }
+      </div>
+    </app-dashboard-card>
+
+    <app-dashboard-card title="Variáveis">
+      <div class="flex items-center gap-2 mb-2 text-emerald-600">
+        <lucide-angular [img]="icons.sliders" [size]="20" />
+        <span class="font-medium">Parâmetros ativos</span>
+        <span class="ml-auto text-sm text-gray-500 hidden sm:inline"
+          >{{ variables().length }} totais</span
+        >
+      </div>
+      <div class="space-y-2">
+        @for (variable of variables(); track $index) {
+
+        <div
+          class="flex justify-between items-center p-2 rounded-lg transition-colors hover:bg-emerald-500 hover:text-white cursor-pointer"
+        >
+          <span class="font-medium">
+            {{ getVariableMessageByType(variable) }}</span
+          >
+        </div>
+
+        } @empty {
+        <p class="text-gray-400 italic">Nenhuma variável definida.</p>
+        }
+      </div>
+    </app-dashboard-card>
+  </div>
+</div>

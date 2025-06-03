@@ -1,0 +1,51 @@
+<div #searchRef class="relative w-80 mx-auto">
+  <lucide-icon
+    [name]="searchIcon"
+    class="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-600 w-4 h-4 pointer-events-none"
+  ></lucide-icon>
+
+  <input
+    type="text"
+    [(ngModel)]="query"
+    (input)="handleQueryChange($event)"
+    (focus)="handleFocus()"
+    placeholder="Digite o nome da cidade"
+    class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all duration-200"
+  />
+
+  <ul
+    *ngIf="isResultsVisible"
+    class="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-md shadow-lg max-h-48 overflow-y-auto z-10 list-none p-0 m-0"
+  >
+    <li
+      *ngFor="let city of searchResults"
+      (click)="handleSelectCity(city)"
+      class="p-2 cursor-pointer hover:bg-gray-100 transition-colors duration-150"
+    >
+      {{ city.name }}, {{ city.state }}
+    </li>
+  </ul>
+
+  <div
+    *ngIf="showConfirmation"
+    class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+  >
+    <div class="bg-white p-6 rounded-md shadow-lg text-center">
+      <p class="mb-4 text-gray-700">
+        Adicionar {{ selectedCity?.name }} à lista?
+      </p>
+      <button
+        (click)="confirmAddCity()"
+        class="bg-emerald-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-emerald-600 transition-colors duration-150"
+      >
+        Sim
+      </button>
+      <button
+        (click)="cancelAddCity()"
+        class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors duration-150"
+      >
+        Não
+      </button>
+    </div>
+  </div>
+</div>

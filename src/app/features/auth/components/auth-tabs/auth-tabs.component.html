@@ -1,0 +1,24 @@
+<div
+  class="flex rounded-t-lg overflow-hidden mb-6 text-white text-sm md:text-base"
+>
+  <button
+    class="flex-1 py-2.5 px-4 transition-colors duration-300"
+    [ngClass]="{
+      'bg-emerald-600 text-white font-medium': activeTab === 'signup',
+      'bg-gray-800 text-white': activeTab !== 'signup'
+    }"
+    (click)="onTabClick('signup')"
+  >
+    Cadastre-se
+  </button>
+  <button
+    class="flex-1 py-2.5 px-4 transition-colors duration-300"
+    [ngClass]="{
+      'bg-emerald-600 text-white font-medium': activeTab === 'login',
+      'bg-gray-800 text-white': activeTab !== 'login'
+    }"
+    (click)="onTabClick('login')"
+  >
+    Login
+  </button>
+</div>

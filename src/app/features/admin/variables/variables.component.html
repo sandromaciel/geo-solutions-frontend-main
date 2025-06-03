@@ -1,0 +1,37 @@
+<main class="pt-28 px-8 pb-8">
+  <h1 class="text-2xl font-bold text-[#5B5B5B] mb-8">Variáveis</h1>
+  <div class="grid grid-cols-2 gap-6">
+    <app-variable-card
+      title="Confrontação"
+      [type]="variableType.CONFRONTATION"
+      [onAdd]="handleAddConfig.bind(this)"
+      [onEdit]="handleEditConfig.bind(this)"
+      [onDelete]="handleDeleteConfig.bind(this)"
+      [configs]="configs().confrontation"
+    ></app-variable-card>
+    <app-variable-card
+      title="Deslocamento"
+      [type]="variableType.DISPLACEMENT"
+      [onAdd]="handleAddConfig.bind(this)"
+      [onEdit]="handleEditConfig.bind(this)"
+      [onDelete]="handleDeleteConfig.bind(this)"
+      [configs]="configs().displacement"
+    ></app-variable-card>
+    <app-variable-card
+      title="Hospedagem"
+      [type]="variableType.ACCOMODATION"
+      [onAdd]="handleAddConfig.bind(this)"
+      [onEdit]="handleEditConfig.bind(this)"
+      [onDelete]="handleDeleteConfig.bind(this)"
+      [configs]="configs().accomodation"
+    ></app-variable-card>
+    <app-variable-card
+      title="Ponto de Partida"
+      [type]="variableType.STARTING_POINT"
+      [onAdd]="handleAddConfig.bind(this)"
+      [onEdit]="handleEditConfig.bind(this)"
+      [onDelete]="handleDeleteConfig.bind(this)"
+      [configs]="configs().starting_point"
+    ></app-variable-card>
+  </div>
+</main>

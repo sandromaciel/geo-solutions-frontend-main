@@ -1,0 +1,17 @@
+<button
+  class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all"
+  [ngClass]="{
+    'bg-emerald-600 text-white': isActive(),
+    'text-gray-300 hover:bg-emerald-500/10': !isActive(),
+    'lg:justify-center lg:px-2': !layout.isSidebarOpen
+  }"
+>
+  <lucide-icon [name]="icon()" class="w-6 h-6 flex-shrink-0" />
+
+  <span
+    class="font-medium whitespace-nowrap"
+    [class.hidden]="!layout.isSidebarOpen"
+  >
+    {{ label() }}
+  </span>
+</button>

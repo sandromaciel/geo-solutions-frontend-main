@@ -1,0 +1,61 @@
+<div class="p-4 sm:p-4 lg:p-6 space-y-6">
+  <div class="mb-8">
+    <h1 class="text-2xl font-semibold text-[#1a1a1a]">Orçamentos</h1>
+    <p class="text-[#707070]">Lista de todos os orçamentos realizados</p>
+  </div>
+
+  <div class="bg-white shadow rounded-lg overflow-x-auto">
+    <div *ngIf="!isDataLoaded()" class="flex justify-center py-8">
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+
+    <div *ngIf="isDataLoaded()" class="min-w-full">
+      <div class="flex items-center gap-2 mb-4 px-4 pt-4 text-emerald-600">
+        <lucide-angular [img]="icons.fileText" [size]="20" />
+        <span class="font-medium">Histórico de Orçamentos</span>
+        <span class="ml-auto text-sm text-gray-500">
+          {{ budgets().length }} registros
+        </span>
+      </div>
+
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Celular</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Serviço</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Intenção</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Endereço</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preço</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data de Criação</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          @for (budget of budgets(); track $index) {
+            <tr class="hover:bg-emerald-500 hover:text-white transition-colors">
+              <td class="px-6 py-4 whitespace-nowrap">{{ budget.id }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ budget.user.email }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ budget.user.cell }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ budget.serviceType.name || 'Sem descrição'}}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ budget.intentionService.name || 'Sem descrição' }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ formatAddress(budget.address) }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ formatPrice(budget.price) }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ formatDate(budget.startDate) }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <i class="fa-solid fa-file-pdf text-green-500 text-lg cursor-pointer hover:text-green-600 transition" (click)="viewBudgetPdf(budget)"></i>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="8" class="px-6 py-4 text-center text-gray-400 italic">
+                Nenhum orçamento encontrado.
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

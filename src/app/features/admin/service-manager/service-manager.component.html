@@ -1,0 +1,114 @@
+<main class="pt-28 px-4 md:px-8 pb-8">
+  <section class="bg-white rounded-xl p-4 md:p-10 shadow">
+    <div class="flex justify-between items-center mb-6 md:mb-10">
+      <h3 class="text-2xl font-semibold text-gray-800">
+        Gerenciamento de Serviços
+      </h3>
+
+      <button
+        (click)="openServiceTypeFormModal()"
+        class="flex items-center bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl h-11 md:h-14 px-4 md:px-6 text-sm md:text-base transition-colors"
+      >
+        <lucide-angular [img]="icons.plus" class="w-5 h-5 md:w-6 md:h-6 mr-2" />
+        Adicionar Serviço
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      @for (service of services(); track $index) {
+      <div class="flex flex-col gap-4">
+        <div
+          class="bg-gray-100 rounded-xl h-16 md:h-20 flex items-center justify-between px-4 md:px-6 shadow-sm max-w-full"
+        >
+          <h3 class="font-semibold text-gray-800 text-lg md:text-xl truncate">
+            {{ service.name }}
+          </h3>
+          <div class="flex items-center gap-3 md:gap-4 text-gray-700">
+            <button (click)="openServiceTypeFormModal(service)">
+              <lucide-angular
+                [img]="icons.pencil"
+                class="w-5 h-5 md:w-6 md:h-6 cursor-pointer"
+              />
+            </button>
+
+            <button (click)="openConfirmServiceDeletion($event, service)">
+              <lucide-angular
+                [img]="icons.trash"
+                class="w-5 h-5 md:w-6 md:h-6 cursor-pointer"
+              />
+            </button>
+            <p-confirmPopup></p-confirmPopup>
+
+            <lucide-angular
+              [img]="icons.chevronDown"
+              class="w-5 h-5 md:w-6 md:h-6 cursor-pointer"
+            />
+          </div>
+        </div>
+
+        <div
+          class="bg-white rounded-xl shadow p-4 md:p-6 flex flex-col gap-4 md:gap-6 h-[350px] overflow-y-auto"
+        >
+          @for (service of (service.id ? intentionsByServiceType()[service.id] :
+          []); track $index) {
+          <div class="rounded-lg shadow p-4">
+            <div class="flex flex-col md:flex-row md:justify-between gap-2">
+              <h4
+                class="font-medium text-gray-900 text-sm md:text-base truncate"
+              >
+                {{ service.name }}
+              </h4>
+              <div class="flex gap-4 text-sm">
+                <button (click)="openIntentionFormModal($event, service)">
+                  <span class="text-emerald-700 hover:underline cursor-pointer"
+                    >Editar</span
+                  >
+                </button>
+                <button
+                  (click)="openIntentionDeletionConfirmation($event, service)"
+                >
+                  <span class="text-red-600 hover:underline cursor-pointer"
+                    >Excluir</span
+                  >
+                </button>
+              </div>
+            </div>
+            <p class="text-xs text-gray-700 mt-2 truncate">
+              {{ service.description }}
+            </p>
+          </div>
+          } @empty {
+          <div class="text-gray-500 text-sm text-center py-4">
+            Nenhum intuito cadastrado para este serviço.
+          </div>
+          }
+
+          <div class="mt-auto">
+            <button
+              (click)="openIntentionFormModal($event)"
+              class="flex items-center bg-gray-900 hover:bg-gray-800 text-white rounded-xl h-11 md:h-14 px-4 md:px-6 text-sm md:text-base transition-colors"
+            >
+              <lucide-angular
+                [img]="icons.plus"
+                class="w-4 h-4 md:w-5 md:h-5 mr-2"
+              />
+              Adicionar Intuito
+            </button>
+          </div>
+        </div>
+      </div>
+      } @empty {
+      <div class="text-center py-12 text-gray-500 col-span-3">
+        <p class="text-base md:text-lg">
+          Nenhum serviço cadastrado no momento.
+        </p>
+        <p class="text-sm mt-2">
+          Clique em
+          <span class="text-emerald-700 font-medium">"Adicionar Serviço"</span>
+          para começar.
+        </p>
+      </div>
+      }
+    </div>
+  </section>
+</main>

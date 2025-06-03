@@ -1,0 +1,22 @@
+<div class="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4">
+  <div
+    class="bg-white shadow-xl rounded-xl p-6 md:p-10 max-w-lg w-full text-center"
+  >
+    <div class="flex justify-center mb-6">
+      <lucide-angular [img]="icons.map" class="w-20 h-20 text-[#00B86B]" />
+    </div>
+
+    <h1 class="text-5xl font-bold text-[#00B86B] mb-4">404</h1>
+    <h2 class="text-2xl font-semibold text-[#2D2D2D] mb-2">
+      Página não encontrada
+    </h2>
+    <p class="text-gray-600 mb-8">Ops! Parece que você se perdeu no caminho.</p>
+
+    <button
+      (click)="goHome()"
+      class="bg-[#00B86B] text-white font-semibold px-6 py-2 rounded-full hover:bg-[#00995A] transition-colors duration-300"
+    >
+      Voltar para a página inicial
+    </button>
+  </div>
+</div>

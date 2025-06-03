@@ -1,0 +1,115 @@
+<header class="bg-black text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="h-20 flex items-center justify-between">
+      <div class="flex items-center cursor-pointer" (click)="goToHome()">
+        <img src="assets/images/logo_img.png" class="w-[160px]" />
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-8">
+        <a
+          routerLink="/about"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white transition-colors duration-200"
+          >Sobre</a
+        >
+        <a
+          routerLink="/services"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white transition-colors duration-200"
+          >Serviços</a
+        >
+        @if (!isAuthenticated()) {
+        <a
+          routerLink="/auth/signin"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white transition-colors duration-200"
+          >Login</a
+        >
+        <a
+          routerLink="/auth/signup"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white transition-colors duration-200"
+          >Cadastro</a
+        >
+        } @else {
+        <a
+          routerLink="/user"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white transition-colors duration-200"
+          >Perfil</a
+        >
+        <button
+          (click)="logout()"
+          class="text-gray-300 hover:text-white transition-colors duration-200"
+        >
+          Sair
+        </button>
+        }
+      </nav>
+
+      <div class="hidden md:block">
+        <button
+          routerLink="/budget"
+          class="bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition-colors duration-200"
+        >
+          Orçamento
+        </button>
+      </div>
+
+      <button
+        class="md:hidden text-gray-300 hover:text-white"
+        (click)="toggleMenu()"
+      >
+        @if (isMenuOpen) {
+        <lucide-angular size="24" [img]="icons.x" />
+        } @if (!isMenuOpen) {
+        <lucide-angular size="24" [img]="icons.menu" />
+        }
+      </button>
+    </div>
+
+    <div *ngIf="isMenuOpen" class="md:hidden py-4">
+      <nav class="flex flex-col space-y-4 pb-4">
+        <a
+          routerLink="/about"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white transition-colors duration-200"
+          >Sobre</a
+        >
+        <a
+          routerLink="/services"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white transition-colors duration-200"
+          >Serviços</a
+        >
+        @if (!isAuthenticated()) {
+        <a
+          routerLink="/auth/signin"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white transition-colors duration-200"
+          >Login</a
+        >
+        <a
+          routerLink="/auth/signup"
+          routerLinkActive="text-white"
+          class="text-gray-300 hover:text-white transition-colors duration-200"
+          >Cadastro</a
+        >
+        } @else {
+        <button
+          (click)="logout()"
+          class="text-gray-300 hover:text-white transition-colors duration-200 text-left"
+        >
+          Sair
+        </button>
+        }
+        <button
+          routerLink="/budget"
+          class="bg-lime-500 text-white px-6 py-2 rounded-full hover:bg-lime-600 transition-colors duration-200 w-full"
+        >
+          Orçamento
+        </button>
+      </nav>
+    </div>
+  </div>
+</header>

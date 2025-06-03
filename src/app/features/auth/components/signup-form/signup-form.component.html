@@ -1,0 +1,58 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
+  <div class="mb-4">
+    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+      Nome
+    </label>
+    <input id="name" type="text" formControlName="name" autocomplete="name"
+      class="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500"
+      placeholder="Seu nome" required />
+    <small class="text-left d-block w-100 text-danger pl-2 pt-1">{{
+      getErrorMessage("name", form)
+      }}</small>
+  </div>
+
+  <div class="mb-4">
+    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+      Email
+    </label>
+    <input id="email" type="email" autocomplete="email" formControlName="email"
+      class="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500"
+      placeholder="seu@email.com" required />
+    <small class="text-left d-block w-100 text-danger pl-2 pt-1">{{
+      getErrorMessage("email", form)
+      }}</small>
+  </div>
+
+  <div class="mb-4">
+    <label for="cell" class="block text-sm font-medium text-gray-700 mb-1">
+      Celular
+    </label>
+    <input id="cell" type="tel" autocomplete="tel" formControlName="cell"
+      class="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500"
+      placeholder="(31) 99999-9999" required />
+    <small class="text-left d-block w-100 text-danger pl-2 pt-1">{{
+      getErrorMessage("cell", form)
+      }}</small>
+  </div>
+
+  <div class="mb-4">
+    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+      Senha
+    </label>
+    <input id="password" type="password" autocomplete="new-password" formControlName="password"
+      class="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500"
+      placeholder="********" required />
+    <small class="text-left d-block w-100 text-danger pl-2 pt-1">{{
+      getErrorMessage("password", form)
+      }}</small>
+  </div>
+
+  <button type="submit"
+    class="mx-auto block bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-2 px-6 rounded-md transition-colors duration-300"
+    [disabled]="!form.valid || loading" [ngClass]="{
+      'bg-emerald-500 hover:bg-emerald-600': form.valid && !loading,
+      'bg-gray-400 cursor-not-allowed': loading || !form.valid
+    }">
+    Cadastrar
+  </button>
+</form>

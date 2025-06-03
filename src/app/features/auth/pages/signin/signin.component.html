@@ -1,0 +1,23 @@
+<div class="flex items-center justify-center">
+  <div
+    class="w-full max-w-5xl bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row"
+  >
+    <div
+      class="w-full md:w-1/2 bg-gray-50 p-8 flex items-center justify-center"
+    >
+      <app-illustration></app-illustration>
+    </div>
+
+    <div class="w-full md:w-1/2 p-8">
+      <app-auth-tabs
+        [activeTab]="activeTab"
+        (changeTab)="setActiveTab($event)"
+      ></app-auth-tabs>
+
+      <div class="mt-2">
+        <app-signin-form *ngIf="activeTab === 'login'"></app-signin-form>
+        <app-signup-form *ngIf="activeTab === 'signup'"></app-signup-form>
+      </div>
+    </div>
+  </div>
+</div>

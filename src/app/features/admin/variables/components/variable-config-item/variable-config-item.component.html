@@ -1,0 +1,66 @@
+<div class="px-4 py-2">
+  <div class="bg-[#F2F7F4] rounded-lg p-4 shadow-sm">
+    <div class="flex justify-between items-start">
+      <div class="space-y-1 text-sm text-[#5B5B5B]">
+        @if ( isConfrontacao) {
+        <ng-container
+          *ngTemplateOutlet="confrontacaoUrbana; context: { config: config() }"
+        ></ng-container>
+        } @if (isDeslocamento) {
+        <ng-container
+          *ngTemplateOutlet="multiplicador; context: { config: config() }"
+        ></ng-container>
+        } @if (isHospedagem) {
+        <ng-container
+          *ngTemplateOutlet="distancia; context: { config: config() }"
+        ></ng-container>
+        } @if (isPontoPartida) {
+        <ng-container
+          *ngTemplateOutlet="localizacao; context: { config: config() }"
+        ></ng-container>
+        }
+      </div>
+      <div class="flex space-x-2">
+        <button
+          (click)="onEdit()()"
+          class="text-gray-400 hover:text-[#58A082] transition-colors"
+        >
+          <lucide-angular [img]="icons.pencil" class="w-4 h-4" />
+        </button>
+        <button
+          class="text-gray-400 hover:text-red-500 transition-colors"
+          (click)="confirmDelete($event)"
+        >
+          <lucide-angular [img]="icons.trash" class="w-4 h-4" />
+        </button>
+        <p-confirmPopup></p-confirmPopup>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #confrontacaoUrbana let-config="config">
+  <p>Preço: R$ {{ config.price }}</p>
+  <p>Divisa: {{ config.areaMin }} km - {{ config.areaMax }} km</p>
+  <p>
+    Tipo: @if ((config).urbanConfrontation && (config).ruralConfrontation) {
+    Confrontação Urbana e Rural } @else if ((config).urbanConfrontation) {
+    Confrontação Urbana } @else { Confrontação Rural }
+  </p>
+</ng-template>
+
+<ng-template #multiplicador let-config="config">
+  <p>Distância: {{ config.areaMin }} km - {{ config.areaMax }}km</p>
+  <p>Multiplicador: {{ config.multiplier }}x</p>
+</ng-template>
+
+<ng-template #distancia let-config="config">
+  <p>Preço: R$ {{ config.price }}</p>
+  <p>Distância: {{ config.distanteMin }} km - {{ config.distanteMax }} km</p>
+</ng-template>
+
+<ng-template #localizacao let-config="config">
+  <p>{{ config.street }}, {{ config.number }}</p>
+  <p>{{ config.neighborhood }} - {{ config.city }}/{{ config.state }}</p>
+  <p>{{ config.country }}</p>
+</ng-template>

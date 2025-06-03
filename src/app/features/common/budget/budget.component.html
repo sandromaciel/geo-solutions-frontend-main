@@ -1,0 +1,157 @@
+<p-toast (click)="messageService.clear()">
+  <ng-template let-message pTemplate="message">
+    <div class="flex flex-column p-4" style="flex: 1">
+      <div class="text-center">
+        <i class="pi pi-exclamation-triangle" style="font-size: 2.5rem; color: #f59e0b;"></i>
+        <h4 class="text-lg font-bold text-gray-800">{{ message.summary }}</h4>
+        <p class="text-gray-600"  [innerHTML]="message.detail"></p>
+      </div>
+      <div class="flex justify-content-center mt-3">
+        <button
+          *ngIf="redirectWpp"
+          type="button"
+          class="p-button bg-green-500 hover:bg-green-600 text-white border-none py-2 px-4 rounded-lg"
+          (click)="onWppButtonClick(message)"
+        >Fale conosco no WhatsApp</button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+<div class="bg-white shadow-md max-w-4xl mx-auto mt-10 rounded-xl border border-gray-200 main-form">
+  <h2 style="background-color: #82c856;" class="text-black text-center text-2xl font-bold py-3 rounded-t-xl">Orçamento</h2>
+
+  <form [formGroup]="form" class="p-6 space-y-6">
+    <!-- Localização -->
+    <div>
+      <h3 class="text-lg font-semibold mb-2">Localização</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        <!-- Input de CEP com ícone interno à direita -->
+        <div class="relative w-full">
+          <input
+            type="text"
+            formControlName="cep"
+            placeholder="CEP"
+            maxlength="8"
+            pattern="[0-9]*"
+            class="input pr-10 w-full"
+            style="pointer-events: auto;"
+          />
+          <i
+            class="fa fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer z-10"
+            (click)="getAddressByCep()"
+            style="pointer-events: auto;"
+          ></i>
+        </div>
+
+        <!-- Outros inputs -->
+        <input formControlName="logradouro" placeholder="Logradouro" class="input" />
+        <input formControlName="bairro" placeholder="Bairro" class="input" />
+        <input formControlName="cidade" placeholder="Cidade" class="input" />
+        <input formControlName="estado" placeholder="Estado" class="input" />
+        <input formControlName="numero" placeholder="Número" class="input" />
+        <input formControlName="complemento" placeholder="Complemento" class="input" />
+      </div>
+    </div>
+
+
+    <!-- Sobre o Imóvel -->
+    <div>
+      <h3 class="text-lg font-semibold mb-2">Área</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <!-- Input de área -->
+        <input formControlName="area" placeholder="Área do Imóvel" class="input" />
+
+        <!-- Radios m² e hectare -->
+        <div class="flex gap-4">
+          <label class="flex items-center gap-1">
+            <input type="radio" [value]="EUnitOfMeasure.SquareMeter" formControlName="unitOfMeasure" />
+            m²
+          </label>
+          <label class="flex items-center gap-1">
+            <input type="radio" [value]="EUnitOfMeasure.Hectare" formControlName="unitOfMeasure" />
+            ha
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Qual serviço -->
+    <div>
+      <h3 class="text-lg font-semibold mb-2">Qual serviço?</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <select id="servico" formControlName="servico" class="form-control">
+          <option [ngValue]="0">Selecione um serviço</option>
+          <option *ngFor="let servico of serviceTypes" [ngValue]="servico.id">
+            {{ servico.name }}
+          </option>
+        </select>
+        <select id="detalheServico" formControlName="detalheServico" class="form-control" [disabled]="!intentions.length">
+          <option *ngIf="!intentions.length" [ngValue]="0">Selecione o detalhe do serviço</option>
+          <option *ngFor="let intention of intentions" [ngValue]="intention.name">
+            {{ intention.name }}
+          </option>
+        </select>
+
+        <div *ngIf="mostrarConfrontacoes" class="mt-4">
+          <label for="confrontations" class="block text-sm font-medium text-gray-700">Confrontações</label>
+          <input
+            type="number"
+            formControlName="confrontations"
+            placeholder="Informe a quantidade de confrontações"
+            class="input mt-1"
+          />
+        </div>
+      </div>
+    </div>
+
+   <div>
+     <!--
+      <h3 class="text-lg font-semibold mb-2">Período</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input formControlName="startDate" type="date" class="input" />
+        <input formControlName="endDate" type="date" class="input" />
+      </div>
+ -->
+      <!-- Campo Valor Final (pequeno) -->
+      <div class="mt-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Valor Final</label>
+        <input
+          formControlName="price"
+
+          class="input bg-gray-100 cursor-not-allowed w-1/4"
+          placeholder="R$ 0,00"
+          readonly
+        />
+      </div>
+    </div>
+
+    <!-- Botão -->
+    <div class="flex justify-center gap-4"
+    *ngIf="!this.readonly">
+      <button
+        type="button"
+        (click)="processarCalculo()"
+        class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold">
+        Processar Cálculo
+      </button>
+
+      <button
+        type="submit"
+        (click)="gerarOrcamento()"
+        style="background-color: #82c856"
+        class="text-black px-6 py-2 rounded-lg font-semibold">
+        Gerar Orçamento
+      </button>
+    </div>
+
+    <div class="flex justify-center gap-4" *ngIf="this.readonly">
+    <button
+      type="button"
+      (click)="generatePdf()"
+      class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg font-semibold">
+      Visualizar
+    </button>
+  </div>
+  </form>
+</div>

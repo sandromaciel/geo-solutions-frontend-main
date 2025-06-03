@@ -1,0 +1,69 @@
+.recuperar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-color: #f9f9f9;
+}
+
+.modal {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    color: #000000;
+  }
+
+  p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    color: #555;
+  }
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+    text-align: left;
+    color: #333;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+
+  button {
+    background-color: #58a082;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+
+    &:disabled {
+      background-color: #a3d1b6;
+      cursor: not-allowed;
+    }
+  }
+
+  .erro {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 12px;
+    text-align: left;
+  }
+}

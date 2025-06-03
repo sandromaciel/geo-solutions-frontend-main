@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+:root {
+  --white: #ffffff;
+  --light-gray-1: #fbfbfb;
+  --light-gray-2: #dfe0e0;
+  --light-gray-3: #fafbfc;
+  --green-1: #579679;
+  --green-2: #82c856;
+  --green-3: #66a06d;
+  --gray: #616161;
+  --dark-green: #1b2a27;
+  --black: #010201;
+}
