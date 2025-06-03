@@ -27,7 +27,7 @@
     "jspdf": "^3.0.1",
     "jwt-decode": "^4.0.0",
     "lucide-angular": "^0.488.0",
-    "ng-apexcharts": "^1.8.0",
+    "ng-apexcharts": "1.8.0",
     "postcss": "^8.5.3",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.15",
